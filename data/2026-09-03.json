@@ -1,0 +1,74 @@
+{
+  "tanggal": "2026-09-03",
+  "edisi": "pagi",
+  "sinyal_utama": "Surplus dagang nyaris habis — tinggal US$110 juta pada Juli — sementara Brent di US$94,90 memperlebar defisit migas. Inflasi 3,19% sudah nyaman di dalam target, tetapi BI menahan bunga di 5,75% karena mandat praktisnya kini kurs, bukan pertumbuhan.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy": "3,19%",
+    "USD/IDR": "17.702",
+    "IHSG": "6.590,90",
+    "Brent": "US$94,90",
+    "Neraca dagang": "+US$110 jt"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "deposit_facility_persen": 4.75,
+    "lending_facility_persen": 6.50,
+    "rdg_tanggal": "2026-08-19",
+    "inflasi_yoy_persen": 3.19,
+    "inflasi_mtm_persen": 0.21,
+    "inflasi_ytd_persen": 1.86,
+    "inflasi_inti_yoy_persen": 2.92,
+    "ihk": 111.97,
+    "inflasi_periode": "2026-08",
+    "pimpinan_bi": "Destry Damayanti (setelah Perry Warjiyo mundur, Juli 2026)"
+  },
+  "pasar": {
+    "ihsg_penutupan": 6590.90,
+    "ihsg_perubahan_poin": -9.04,
+    "ihsg_perubahan_persen": -0.14,
+    "ihsg_tanggal": "2026-09-02",
+    "ihsg_rentang": [6561.00, 6629.54],
+    "nilai_transaksi_triliun_rp": 15.50,
+    "volume_miliar_saham": 60.81,
+    "breadth": {"naik": 290, "turun": 344, "stagnan": 329},
+    "asing_net_miliar_rp": -379.67,
+    "usd_idr": 17702,
+    "usd_idr_sebelumnya": 17763,
+    "usd_idr_tanggal": "2026-09-03"
+  },
+  "komoditas": {
+    "brent_usd": 94.90,
+    "wti_usd": 90.32,
+    "stok_minyak_as_juta_barel": -4.5,
+    "cpo_myr_per_ton": 4952,
+    "cpo_hr_kemendag_usd_per_mt": 1007.51,
+    "ekspor_sawit_jan_jul_miliar_usd": 14.79,
+    "transit_hormuz_kapal": 4,
+    "transit_hormuz_rata2": 13,
+    "tanggal": "2026-09-02"
+  },
+  "perdagangan": {
+    "periode": "2026-07",
+    "surplus_juta_usd": 110,
+    "ekspor_miliar_usd": 26.22,
+    "impor_miliar_usd": 26.09,
+    "ekspor_yoy_persen": 6.05,
+    "impor_yoy_persen": 27.02,
+    "ekspor_nonmigas_miliar_usd": 25.43,
+    "ekspor_migas_miliar_usd": 0.79,
+    "migas_yoy_persen": -14.58,
+    "surplus_kumulatif_jan_jul_miliar_usd": 3.70,
+    "modal_asing_masuk_triliun_rp": 140.6
+  },
+  "sumber": [
+    "https://www.bps.go.id/id/pressrelease/2026/09/01/2611/inflasi-year-on-year--y-on-y--pada-agustus-2026-sebesar-3-19-persen-.html",
+    "https://www.antaranews.com/berita/5701356/bi-umumkan-bi-rate-tetap-575-persen-pada-rdg-agustus-2026",
+    "https://www.cnbcindonesia.com/news/20260901114225-4-763940/neraca-dagang-ri-kembali-surplus-juli-2026-capai-us-110-juta/amp",
+    "https://www.cnbcindonesia.com/market/20260902161727-17-764415/ihsg-hari-ini-ditutup-lesu-turun-014-ke-level-65909",
+    "https://www.viva.co.id/bisnis/1925960-rupiah-menguat-ke-rp-17702-dibayangi-inflasi-pangan-dan-kembali-memanasnya-perang-iran-as",
+    "https://www.presscorner.id/2026/09/02/33462/harga-minyak-naik-brent-tembus-us-9490-di-tengah-perang-as-iran/",
+    "https://www.cnbcindonesia.com/research/20260831101657-128-763590/ini-ramalan-harga-cpo-terbaru-pengusaha-ri-bisa-senyum-senyum",
+    "https://m.antaranews.com/amp/berita/5721177/kemendag-hr-cpo-september-naik-jadi-100751-dolar-as-per-mt"
+  ]
+}

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Hasil build — dibangun oleh scripts/build.py di GitHub Actions
+index.html
+arsip.html
+editions/*.html
+!editions/*.src.html
+data/index.json
