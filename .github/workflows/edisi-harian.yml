@@ -48,7 +48,11 @@ jobs:
           # Pengungkit biaya terbesar: input ditagih tiap putaran pencarian,
           # sehingga totalnya tumbuh kuadratik terhadap angka ini.
           MAKS_PENCARIAN: ${{ vars.MAKS_PENCARIAN || '12' }}
-          PAKSA: ${{ inputs.paksa }}
+          # Run terjadwal selalu menyusun ulang. Bila edisi hari itu sudah ada
+          # karena uji coba manual, hasil pagi yang datanya lebih baru berhak
+          # menimpanya. Aman karena kegagalan tidak menghasilkan commit,
+          # sehingga edisi lama tetap utuh bila penyusunan gagal.
+          PAKSA: ${{ inputs.paksa || github.event_name == 'schedule' }}
         # Log run Actions hanya bisa dibaca setelah masuk akun. Baris terakhir
         # keluaran diangkat jadi anotasi ::error:: supaya sebab kegagalan
         # terbaca langsung di halaman ringkasan, tanpa membuka log.

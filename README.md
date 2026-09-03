@@ -44,6 +44,8 @@ Perkiraan biaya per edisi dengan Sonnet 5: sekitar US$0,35 (pencarian US$10 per 
 
 Menjalankan di luar jadwal: tab **Actions → Edisi harian → Run workflow**. Centang `paksa` untuk menimpa edisi hari itu bila sudah ada.
 
+Run terjadwal pukul 07.00 selalu menyusun ulang, sehingga edisi hasil uji coba manual pada hari yang sama akan tertimpa oleh edisi pagi yang datanya lebih baru. Menulis edisi dengan tangan untuk hari yang sedang berjalan karena itu perlu disertai penonaktifan sementara workflow `Edisi harian`, agar tidak ditimpa keesokan paginya.
+
 ## Validasi
 
 Skrip menolak melakukan commit bila edisi tidak lolos pemeriksaan: frontmatter lengkap, minimal 4 indikator dengan arah `up`/`down`/`flat` yang sah, minimal 4 bagian tema yang masing-masing punya baris sumber dan paragraf pembacaan, minimal 4 butir pantau, minimal 4 tautan sumber, tidak ada isian kosong seperti `n/a` pada tabel fakta, tidak ada kalimat berbahasa Inggris yang tersalin mentah ke dalam prosa, serta JSON yang berisi nilai numerik sungguhan, bukan string berformat.
