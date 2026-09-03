@@ -6,25 +6,66 @@ Setiap edisi bukan rekap angka, melainkan pembacaan atas **ketegangan antar data
 
 ## Alur
 
+Edisi disusun sepenuhnya di dalam GitHub Actions, tanpa memerlukan komputer siapa pun dalam keadaan menyala.
+
 ```
-Claude Cowork                         GitHub
-──────────────                        ──────
-Input berita (riset web)     →
-Resume intelijen ekonomi     →
-                                       editions/YYYY-MM-DD.md   (commit)
-                                       scripts/build.py          (Actions)
-                                       Publish → GitHub Pages
+GitHub Actions (07.00 WIB, Sen–Jum)
+───────────────────────────────────
+scripts/susun_edisi.py
+  → riset web lewat Messages API (tool web_search)
+  → tulis editions/YYYY-MM-DD.md + data/YYYY-MM-DD.json
+  → validasi; gagal berarti tidak ada commit
+  → commit dengan GITHUB_TOKEN bawaan
+scripts/build.py
+  → bangun halaman
+  → terbitkan ke GitHub Pages
 ```
 
-Sumber kebenaran setiap edisi adalah **satu file markdown per hari**. GitHub Actions membangunnya jadi halaman bergaya setiap kali di-push — tidak ada HTML hasil generate yang ikut ter-commit.
+Sumber kebenaran setiap edisi adalah **satu file markdown per hari**. Halaman HTML dibangun ulang tiap kali, tidak ikut di-commit.
+
+Menulis edisi secara manual tetap bisa: tambahkan `editions/YYYY-MM-DD.md` lalu push, dan `pages.yml` akan membangun serta menerbitkannya.
+
+## Penyiapan otomasi
+
+Sekali saja, di Settings repo:
+
+1. **Secrets and variables → Actions → New repository secret**
+   Nama `ANTHROPIC_API_KEY`, isi kunci API dari [console Anthropic](https://console.anthropic.com/settings/keys).
+2. **Pages → Build and deployment → Source**: GitHub Actions.
+
+Opsional, pada tab **Variables**:
+
+| Variable | Default | Keterangan |
+|---|---|---|
+| `MODEL_EDISI` | `claude-sonnet-5` | Ganti ke `claude-opus-5` untuk analisis lebih dalam dengan biaya lebih tinggi |
+| `MAKS_PENCARIAN` | `15` | Batas pencarian web per edisi |
+
+Perkiraan biaya per edisi dengan Sonnet 5: sekitar US$0,35 (pencarian US$10 per 1.000, token input ~60–100 ribu, output ~8 ribu). Untuk 22 hari kerja, sekitar US$7–10 per bulan. Biaya ini terpisah dari langganan Claude.
+
+Menjalankan di luar jadwal: tab **Actions → Edisi harian → Run workflow**. Centang `paksa` untuk menimpa edisi hari itu bila sudah ada.
+
+## Validasi
+
+Skrip menolak melakukan commit bila edisi tidak lolos pemeriksaan: frontmatter lengkap, minimal 4 indikator dengan arah `up`/`down`/`flat` yang sah, minimal 4 bagian tema yang masing-masing punya baris sumber dan paragraf pembacaan, minimal 4 butir pantau, minimal 4 tautan sumber, tidak ada isian kosong seperti `n/a` pada tabel fakta, serta JSON yang berisi nilai numerik sungguhan, bukan string berformat.
+
+Memeriksa satu berkas secara manual:
+
+```bash
+python3 scripts/susun_edisi.py --validasi editions/2026-09-03.md
+```
+
+Perintah itu juga menghitung tik gaya yang dibatasi `prompts/edisi.md`: tanda pisah dalam prosa, konstruksi antitesis, dan frasa bergaya aforisme. Hitungan ini berupa catatan, bukan penggagal.
 
 ## Struktur
 
 ```
-editions/YYYY-MM-DD.md         Sumber edisi (ditulis manusia atau Claude)   ← di-commit
-data/YYYY-MM-DD.json           Data numerik mentah, untuk seri waktu        ← di-commit
-scripts/build.py               Pembangun situs (stdlib Python saja)        ← di-commit
-.github/workflows/pages.yml    Build + terbit ke Pages tiap push           ← di-commit
+editions/YYYY-MM-DD.md              Sumber edisi                           ← di-commit
+data/YYYY-MM-DD.json                Data numerik untuk seri waktu          ← di-commit
+prompts/edisi.md                    Instruksi bahasa dan format edisi      ← di-commit
+scripts/susun_edisi.py              Penyusun edisi lewat Anthropic API     ← di-commit
+scripts/build.py                    Pembangun situs (stdlib Python saja)   ← di-commit
+.github/workflows/edisi-harian.yml  Susun, bangun, terbitkan (terjadwal)   ← di-commit
+.github/workflows/pages.yml         Bangun dan terbitkan saat push manual  ← di-commit
 
 index.html                     Edisi terbaru                                ← hasil build
 arsip.html                     Daftar seluruh edisi                         ← hasil build

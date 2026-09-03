@@ -1,0 +1,92 @@
+name: Edisi harian
+
+# 00.00 UTC = 07.00 WIB, Senin sampai Jumat.
+# GitHub menjalankan cron pada zona UTC dan kadang tertunda beberapa menit
+# saat beban tinggi. Keterlambatan itu wajar dan tidak perlu dikompensasi.
+on:
+  schedule:
+    - cron: "0 0 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      paksa:
+        description: "Tulis ulang edisi hari ini bila sudah ada"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Satu grup dengan pages.yml supaya dua penerbitan tidak bertabrakan.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  susun:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pasang klien Anthropic
+        run: pip install --quiet anthropic
+
+      - name: Susun edisi hari ini
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Ganti model lewat Settings > Secrets and variables > Actions > Variables,
+          # buat variable bernama MODEL_EDISI, mis. "claude-opus-5".
+          MODEL_EDISI: ${{ vars.MODEL_EDISI || 'claude-sonnet-5' }}
+          # low | medium | high | xhigh | max. Kosongkan untuk default API (high).
+          # Haiku 4.5 tidak mendukung parameter ini; biarkan kosong bila memakainya.
+          EFFORT: ${{ vars.EFFORT || 'medium' }}
+          # Pengungkit biaya terbesar: input ditagih tiap putaran pencarian,
+          # sehingga totalnya tumbuh kuadratik terhadap angka ini.
+          MAKS_PENCARIAN: ${{ vars.MAKS_PENCARIAN || '12' }}
+          PAKSA: ${{ inputs.paksa }}
+        run: python3 scripts/susun_edisi.py
+
+      - name: Commit edisi baru
+        run: |
+          if [ -z "$(git status --porcelain editions data)" ]; then
+            echo "Tidak ada edisi baru untuk di-commit."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add editions data
+          git commit -m "Edisi $(TZ=Asia/Jakarta date +'%-d %B %Y')"
+          git push
+
+      # Build dan deploy dilakukan di workflow yang sama, bukan diserahkan ke
+      # pages.yml: commit oleh GITHUB_TOKEN sengaja tidak memicu workflow lain
+      # (GitHub mencegah rekursi), sehingga pages.yml tidak akan menyala.
+      - name: Bangun situs
+        run: python3 scripts/build.py
+
+      - name: Periksa hasil build
+        run: |
+          test -f index.html || { echo "index.html tidak terbentuk"; exit 1; }
+          test -f arsip.html || { echo "arsip.html tidak terbentuk"; exit 1; }
+          echo "Edisi terbangun: $(ls editions/*.html | wc -l)"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  terbitkan:
+    needs: susun
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
