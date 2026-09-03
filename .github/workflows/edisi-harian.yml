@@ -49,7 +49,15 @@ jobs:
           # sehingga totalnya tumbuh kuadratik terhadap angka ini.
           MAKS_PENCARIAN: ${{ vars.MAKS_PENCARIAN || '12' }}
           PAKSA: ${{ inputs.paksa }}
-        run: python3 scripts/susun_edisi.py
+        # Log run Actions hanya bisa dibaca setelah masuk akun. Baris terakhir
+        # keluaran diangkat jadi anotasi ::error:: supaya sebab kegagalan
+        # terbaca langsung di halaman ringkasan, tanpa membuka log.
+        run: |
+          set -o pipefail
+          if ! python3 scripts/susun_edisi.py 2>&1 | tee /tmp/keluaran; then
+            echo "::error::$(tail -n 6 /tmp/keluaran | tr '\n' '|' | cut -c1-900)"
+            exit 1
+          fi
 
       - name: Commit edisi baru
         run: |
