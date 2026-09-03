@@ -1,0 +1,45 @@
+{
+  "tanggal": "2026-09-04",
+  "sinyal_utama": "IHSG melonjak 1,09% ke 6.667,89 dan rupiah menguat 0,47% ke Rp17.679 meski konflik AS-Iran kembali memanas, karena pasar merespons pelemahan data tenaga kerja AS dan sinyal de-eskalasi dari Presiden AS. Pelantikan definitif Destry Damayanti sebagai Gubernur BI periode 2026-2031 menghapus ketidakpastian kelembagaan, sementara probabilitas kenaikan suku bunga The Fed pada September naik ke 63% meski data ketenagakerjaan lemah.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy": "3,19%",
+    "USD/IDR": "17.679",
+    "IHSG": "6.667,89",
+    "Brent": "US$95,25",
+    "Neraca dagang": "+110 juta US$"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "inflasi_yoy_persen": 3.19
+  },
+  "pasar": {
+    "ihsg_penutupan": 6667.89,
+    "usd_idr": 17679,
+    "ihsg_perubahan_persen": 1.09,
+    "lq45": 662.77
+  },
+  "komoditas": {
+    "brent_usd": 95.25,
+    "cpo_myr_per_ton": 4952
+  },
+  "perdagangan": {
+    "surplus_juta_usd": 110,
+    "ekspor_yoy_persen": 6.05,
+    "tarif_dasar_ri_as_persen": 19
+  },
+  "sumber": [
+    "https://infobanknews.com/402-saham-hijau-ihsg-ditutup-lanjut-menguat-pada-posisi-6-667",
+    "https://www.cnbcindonesia.com/market/20260903162610-17-764749/ihsg-lompat-109-dekati-level-6700-terkerek-kinerja-saham-ini",
+    "https://jogja.antaranews.com/berita/851792/ihsg-ditutup-menguat-ditopang-kombinasi-sentimen-domestik-dan-global",
+    "https://www.pelitakarawang.com/2026/09/rupiah-naik-hingga-penutupan.html",
+    "https://infobanknews.com/rupiah-dibuka-menguat-di-level-rp17-706-per-dolar-as",
+    "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "https://www.antaranews.com/berita/5722495/destry-damayanti-resmi-dilantik-jadi-gubernur-bank-indonesia",
+    "https://indikatorbisnis.com/detail/857033/update-harga-batu-bara-1-september-2026-144-us-dolarton-pasokan-mongolia-anjlok",
+    "https://bisnisinsight.com/detail/921026/rekomendasi-saham-dan-pergerakan-ihsg-hari-ini-kamis-3-september-2026",
+    "https://ekon.go.id/publikasi/detail/6475/sepakati-tarif-baru-19-dengan-amerika-serikat-jadi-huge-wins-untuk-industri-padat-karya-indonesia",
+    "https://www.hukumonline.com/berita/a/kesepakatan-tarif-indonesia-as--dari-minyak-sawit-hingga-transfer-data-lintas-batas-lt69993d59796e4/",
+    "https://finance.detik.com/berita-ekonomi-bisnis/d-8587897/trump-kenakan-tarif-baru-ke-60-negara-indonesia-kena-10"
+  ]
+}
