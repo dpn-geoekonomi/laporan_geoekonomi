@@ -293,7 +293,11 @@ def susun(iso: str, label: str) -> str:
         try:
             jejak = f"{model}" + (f" effort={effort}" if effort else "")
             print(f"Memanggil {jejak} (percobaan {percobaan}/3)...", flush=True)
-            resp = klien.messages.create(**argumen)
+            # Wajib streaming: permintaan dengan max_tokens besar ditambah
+            # belasan putaran pencarian bisa melampaui sepuluh menit, dan SDK
+            # menolak permintaan non-streaming selama itu sebelum dikirim.
+            with klien.messages.stream(**argumen) as aliran:
+                resp = aliran.get_final_message()
             teks = "".join(
                 b.text for b in resp.content if getattr(b, "type", "") == "text"
             )
