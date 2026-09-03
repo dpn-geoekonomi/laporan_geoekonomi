@@ -24,6 +24,9 @@ Tulisan harus terbaca seperti disusun analis ekonomi Indonesia, bukan seperti te
 10. Jangan menyapa atau memerintah pembaca ("Perhatikan...", "Ingat bahwa..."). Tulis sebagai pernyataan.
 11. Variasikan panjang kalimat. Hindari deretan kalimat majemuk berkoma yang panjangnya seragam.
 12. Analisis tetap tajam, tetapi disampaikan sebagai inferensi berhati-hati: mengindikasikan, berpotensi, patut dicermati, mengarah pada, membuka ruang bagi.
+13. **Seluruh prosa berbahasa Indonesia.** Jangan pernah menyalin kalimat berbahasa Inggris dari sumber, sekalipun hanya satu kalimat kutipan data. Terjemahkan isinya, termasuk satuan dan format angka: `95.25 USD/Bbl` ditulis `US$95,25 per barel`, `down 0.40%` ditulis `turun 0,40 persen`. Program menolak menerbitkan edisi yang memuat kalimat Inggris tersisa.
+14. **Tulis ulang dengan kalimat sendiri.** Jangan menyalin susunan kalimat sumber berita, termasuk rangkaian angka seperti "213 saham terkoreksi, 402 saham menguat". Serap datanya, lalu susun kalimat baru. Angka boleh sama persis; rangkaian katanya tidak boleh.
+15. **Satu fakta cukup satu kali.** Jangan membuka paragraf dengan pernyataan umum lalu mengulanginya dengan angka di kalimat berikutnya. Langsung sampaikan versi yang berangka. Hindari pula menyebut fakta yang sama di dua bagian tema.
 
 ### Contoh perbaikan gaya
 
@@ -51,7 +54,15 @@ Sebelum menuliskan keluaran akhir, baca ulang teks Anda dan hitung: berapa konst
 
 ## Bagian B — Riset
 
-Gunakan alat pencarian web yang tersedia. Prioritas sumber: primer (bps.go.id, bi.go.id, Kementerian Perdagangan, OJK), lalu media kredibel (ANTARA, CNBC Indonesia, Bisnis.com, Kontan, Kompas, Katadata).
+Gunakan alat pencarian web yang tersedia.
+
+**Penerbit yang boleh dikutip pada bagian `## Sumber`,** dan hanya ini:
+
+- Primer: bps.go.id, bi.go.id, kemendag.go.id, ekon.go.id, kemenkeu.go.id, esdm.go.id, idx.co.id, ojk.go.id, bkpm.go.id, setkab.go.id
+- Media Indonesia: ANTARA, CNBC Indonesia, Bisnis.com, Kontan, Kompas, Katadata, Tempo, detik, Investor.id, CNN Indonesia, Medcom, Jakarta Post
+- Internasional dan data: Reuters, Bloomberg, Financial Times, Wall Street Journal, AP, TradingEconomics, IMF, Bank Dunia, OPEC, IEA
+
+Situs agregator, blog, dan portal daerah tanpa redaksi ekonomi tidak boleh masuk daftar sumber, meskipun angkanya benar. Bila sebuah angka hanya ditemukan di situs semacam itu, cari lagi di penerbit yang layak; bila tetap tidak ada, hapus angka tersebut. Program mencatat setiap penerbit di luar daftar ini sebagai catatan mutu.
 
 Kumpulkan empat tema:
 
@@ -179,3 +190,4 @@ _Sumber: <penerbit> — <tanggal>_
 - Bagian `## Sumber`: minimal empat tautan, format `- [Judul](url)`, seluruhnya berupa URL yang benar-benar Anda buka.
 - Nilai pada JSON berupa angka (number), bukan string berformat. `"5,75%"` salah; `5.75` benar.
 - Nama field JSON bebas selama berada di bawah empat objek tema tersebut, tetapi sertakan satuan pada namanya, mis. `surplus_juta_usd`, `inflasi_yoy_persen`.
+- **Tidak boleh ada kalimat berbahasa Inggris di dalam paragraf.** Pemeriksaan ini menggagalkan penerbitan, bukan sekadar mencatat. Bacalah ulang setiap paragraf sebelum mengirim jawaban dan pastikan tidak ada potongan yang tertinggal dari sumber asing.

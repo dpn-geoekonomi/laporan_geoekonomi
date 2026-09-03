@@ -152,6 +152,15 @@ def validasi_markdown(md: str, iso: str) -> dict:
         if not u["url"].startswith("http"):
             raise Gagal(f"Sumber '{u['judul']}' bukan URL sah: {u['url']}")
 
+    # Kalimat Inggris yang tersalin mentah adalah cacat yang tidak boleh
+    # terbit. Berbeda dari tik gaya, tidak ada pembacaan wajar atasnya.
+    tertinggal = periksa_bahasa(md)
+    if tertinggal:
+        raise Gagal(
+            "Kalimat berbahasa Inggris tertinggal di prosa: "
+            + " // ".join(tertinggal[:2])
+        )
+
     return doc
 
 
@@ -174,6 +183,93 @@ def hanya_prosa(md: str) -> str:
         if not b.strip().startswith(("_", "- ", "#"))
     ]
     return "\n".join(baris)
+
+
+def kalimat(prosa: str) -> list:
+    """Pecah prosa jadi kalimat. Tidak sempurna, cukup untuk pemeriksaan."""
+    utuh = " ".join(b.strip() for b in prosa.splitlines() if b.strip())
+    return [k.strip() for k in re.split(r'(?<=[.!?])\s+(?=[A-Z"“])', utuh)
+            if len(k.strip()) > 20]
+
+
+# Kata yang lazim di kalimat Inggris dan tidak ada dalam bahasa Indonesia.
+PENANDA_INGGRIS = re.compile(
+    r"\b(?:the|of|from|with|that|was|were|been|are|is|has|have|had|will|would|"
+    r"previous|according|after|before|about|which|their|its|said|"
+    r"to|on|at|by|for|and|but|as|it|this|these|those)\b", re.I
+)
+# Kata fungsi Indonesia. Kehadirannya menandakan kalimat memang berbahasa
+# Indonesia meski memuat istilah asing seperti "safe haven" atau "big caps".
+PENANDA_INDONESIA = re.compile(
+    r"\b(?:yang|dan|dari|pada|untuk|dengan|itu|ini|tidak|akan|adalah|"
+    r"sebesar|persen|menjadi|dalam|karena|tetapi|namun|sementara|"
+    r"ke|di|serta|oleh|telah|masih|juga|lebih)\b", re.I
+)
+
+
+def periksa_bahasa(md: str) -> list:
+    """
+    Cari kalimat yang tertinggal dalam bahasa Inggris.
+
+    Kalimat hasil salin mentah dari sumber berbahasa Inggris pernah lolos
+    ke edisi terbit. Ambangnya sengaja longgar — tiga penanda Inggris dan
+    paling banyak satu penanda Indonesia — supaya kalimat Indonesia yang
+    memuat istilah asing tidak ikut tertangkap.
+    """
+    tersangka = []
+    for k in kalimat(hanya_prosa(md)):
+        n_ing = len(set(m.lower() for m in PENANDA_INGGRIS.findall(k)))
+        n_ind = len(set(m.lower() for m in PENANDA_INDONESIA.findall(k)))
+        if n_ing >= 3 and n_ind <= 1:
+            tersangka.append(k[:160])
+    return tersangka
+
+
+def _token(k: str) -> set:
+    return set(re.findall(r"[a-z0-9,\.]+", k.lower()))
+
+
+def periksa_kembar(md: str) -> list:
+    """Cari kalimat yang isinya nyaris sama, biasanya sisa parafrase ganda."""
+    ks = kalimat(hanya_prosa(md))
+    catatan = []
+    for i in range(len(ks)):
+        a = _token(ks[i])
+        if len(a) < 6:
+            continue
+        for j in range(i + 1, len(ks)):
+            b = _token(ks[j])
+            if len(b) < 6:
+                continue
+            sama = len(a & b) / len(a | b)
+            if sama >= 0.6:
+                catatan.append(f"kalimat nyaris kembar ({sama:.0%}): {ks[i][:90]}…")
+                break
+    return catatan
+
+
+# Penerbit yang memenuhi standar sumber. Sumber primer di baris pertama.
+PENERBIT_LAYAK = {
+    "bps.go.id", "bi.go.id", "kemendag.go.id", "ekon.go.id", "kemenkeu.go.id",
+    "esdm.go.id", "idx.co.id", "ojk.go.id", "bkpm.go.id", "setkab.go.id",
+    "antaranews.com", "cnbcindonesia.com", "bisnis.com", "kontan.co.id",
+    "kompas.com", "kompas.id", "katadata.co.id", "tempo.co", "detik.com",
+    "investor.id", "cnnindonesia.com", "medcom.id", "jakartapost.com",
+    "reuters.com", "bloomberg.com", "ft.com", "wsj.com", "apnews.com",
+    "tradingeconomics.com", "imf.org", "worldbank.org", "opec.org", "iea.org",
+}
+
+
+def periksa_sumber(doc: dict) -> list:
+    """Tandai sumber di luar daftar penerbit layak."""
+    asing = []
+    for u in doc["sumber"]:
+        host = re.sub(r"^www\.", "", (u["url"].split("/")[2:3] or [""])[0].lower())
+        if not any(host == d or host.endswith("." + d) for d in PENERBIT_LAYAK):
+            asing.append(host)
+    if asing:
+        return [f"sumber di luar daftar penerbit layak: {', '.join(sorted(set(asing)))}"]
+    return []
 
 
 def periksa_gaya(md: str) -> list:
@@ -288,6 +384,12 @@ def susun(iso: str, label: str) -> str:
     if effort:
         argumen["output_config"] = {"effort": effort}
 
+    ringkas_run(
+        "### Biaya\n\n"
+        "| Model | Cari | Token masuk | Token keluar | Biaya | ×22 hari |\n"
+        "|---|---:|---:|---:|---:|---:|"
+    )
+
     galat_terakhir = None
     for percobaan in range(1, 4):
         try:
@@ -333,6 +435,24 @@ HARGA = {
 BIAYA_PENCARIAN = 0.01  # US$10 per 1.000 pencarian
 
 
+def ringkas_run(baris: str) -> None:
+    """
+    Tulis ke ringkasan run GitHub Actions.
+
+    Log run hanya terbaca setelah masuk akun, sedangkan halaman ringkasan
+    terbuka untuk siapa pun yang bisa melihat repo. Biaya dan catatan gaya
+    layak ada di sana, bukan terkubur di log.
+    """
+    berkas = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not berkas:
+        return
+    try:
+        with open(berkas, "a", encoding="utf-8") as f:
+            f.write(baris + "\n")
+    except OSError:
+        pass
+
+
 def lapor_biaya(model: str, usage, jumlah_cari: int) -> None:
     """
     Cetak pemakaian dan biaya nyata satu edisi.
@@ -371,6 +491,10 @@ def lapor_biaya(model: str, usage, jumlah_cari: int) -> None:
         f"(≈ US${biaya * 22:.2f} untuk 22 hari kerja)",
         flush=True,
     )
+    ringkas_run(
+        f"| {model} | {jumlah_cari} | {masuk + baca_cache + tulis_cache:,} | "
+        f"{keluar:,} | **US${biaya:.3f}** | US${biaya * 22:.2f} |"
+    )
 
 
 # --------------------------------------------------------------------------
@@ -383,8 +507,9 @@ def main() -> int:
             f"Sah: {len(doc['indikator'])} indikator, {len(doc['brief'])} tema, "
             f"{len(doc['watch'])} butir pantau, {len(doc['sumber'])} sumber."
         )
-        for c in periksa_gaya(berkas.read_text(encoding="utf-8")):
-            print(f"Catatan gaya: {c}")
+        teks = berkas.read_text(encoding="utf-8")
+        for c in periksa_gaya(teks) + periksa_kembar(teks) + periksa_sumber(doc):
+            print(f"Catatan: {c}")
         return 0
 
     hari_ini = datetime.datetime.now(WIB).date()
@@ -419,8 +544,21 @@ def main() -> int:
         f"{len(doc['indikator'])} indikator, {len(doc['brief'])} tema, "
         f"{len(doc['watch'])} butir pantau, {len(doc['sumber'])} sumber."
     )
-    for c in periksa_gaya(md):
-        print(f"Catatan gaya: {c}")
+    catatan = periksa_gaya(md) + periksa_kembar(md) + periksa_sumber(doc)
+    for c in catatan:
+        print(f"Catatan: {c}")
+
+    ringkas_run(f"\n### Edisi {label}\n")
+    ringkas_run(
+        f"{len(doc['indikator'])} indikator · {len(doc['brief'])} tema · "
+        f"{len(doc['watch'])} butir pantau · {len(doc['sumber'])} sumber\n"
+    )
+    if catatan:
+        ringkas_run("Catatan mutu (tidak menggagalkan penerbitan):\n")
+        for c in catatan:
+            ringkas_run(f"- {c}")
+    else:
+        ringkas_run("Tidak ada catatan mutu.")
     return 0
 
 

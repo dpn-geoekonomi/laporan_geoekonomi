@@ -46,7 +46,7 @@ Menjalankan di luar jadwal: tab **Actions → Edisi harian → Run workflow**. C
 
 ## Validasi
 
-Skrip menolak melakukan commit bila edisi tidak lolos pemeriksaan: frontmatter lengkap, minimal 4 indikator dengan arah `up`/`down`/`flat` yang sah, minimal 4 bagian tema yang masing-masing punya baris sumber dan paragraf pembacaan, minimal 4 butir pantau, minimal 4 tautan sumber, tidak ada isian kosong seperti `n/a` pada tabel fakta, serta JSON yang berisi nilai numerik sungguhan, bukan string berformat.
+Skrip menolak melakukan commit bila edisi tidak lolos pemeriksaan: frontmatter lengkap, minimal 4 indikator dengan arah `up`/`down`/`flat` yang sah, minimal 4 bagian tema yang masing-masing punya baris sumber dan paragraf pembacaan, minimal 4 butir pantau, minimal 4 tautan sumber, tidak ada isian kosong seperti `n/a` pada tabel fakta, tidak ada kalimat berbahasa Inggris yang tersalin mentah ke dalam prosa, serta JSON yang berisi nilai numerik sungguhan, bukan string berformat.
 
 Memeriksa satu berkas secara manual:
 
@@ -54,7 +54,7 @@ Memeriksa satu berkas secara manual:
 python3 scripts/susun_edisi.py --validasi editions/2026-09-03.md
 ```
 
-Perintah itu juga menghitung tik gaya yang dibatasi `prompts/edisi.md`: tanda pisah dalam prosa, konstruksi antitesis, dan frasa bergaya aforisme. Hitungan ini berupa catatan, bukan penggagal.
+Perintah itu juga mencatat mutu yang tidak sampai menggagalkan penerbitan: tik gaya yang dibatasi `prompts/edisi.md` (tanda pisah dalam prosa, konstruksi antitesis, frasa bergaya aforisme), kalimat yang nyaris kembar, dan sumber dari penerbit di luar daftar yang disetujui. Pada run terjadwal, catatan ini beserta biaya nyata edisi muncul di halaman ringkasan run Actions, sehingga terbaca tanpa membuka log.
 
 ## Struktur
 
