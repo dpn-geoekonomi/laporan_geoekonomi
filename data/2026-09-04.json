@@ -1,59 +1,55 @@
 {
   "tanggal": "2026-09-04",
-  "sinyal_utama": "Neraca dagang Juli 2026 surplus tipis US$130 juta karena impor melonjak 27,02% yoy jauh melampaui pertumbuhan ekspor 6,05% yoy, sementara IHSG justru menguat 1,09% ke 6.667,89 dan rupiah menguat ke Rp17.679 meski harga minyak dunia bertahan di atas US$95 akibat eskalasi AS-Iran.",
+  "sinyal_utama": "Inflasi Agustus 3,19% yoy masih dalam sasaran namun BI menahan suku bunga di 5,75%, sementara surplus dagang Juli yang tipis (US$120 juta) menyembunyikan laju impor 27,02% yang jauh melampaui ekspor 6,05%. IHSG justru menguat 1,09% ke 6.667,89 dan rupiah menguat ke Rp17.679 meski Brent bertahan di atas US$95 akibat eskalasi AS-Iran di Selat Hormuz.",
   "indikator": {
     "BI-Rate": "5,75%",
     "Inflasi yoy": "3,19%",
     "USD/IDR": "17.679",
     "IHSG": "6.667,89",
     "Brent": "US$95,25",
-    "Neraca dagang": "US$130 juta"
+    "Neraca dagang": "+120 juta US$"
   },
   "makro": {
     "bi_rate_persen": 5.75,
     "inflasi_yoy_persen": 3.19,
-    "inflasi_yoy_persen_juli": 2.28,
-    "fiskal_pendapatan_yoy_persen_juli": 21.3,
-    "fiskal_belanja_yoy_persen_juli": 18.2
+    "inflasi_mtm_persen_implied_prev": 2.28,
+    "pdb_q1_2026_yoy_persen": 5.61,
+    "proyeksi_pdb_2026_bank_mandiri_persen": 5.34
   },
   "pasar": {
     "ihsg_penutupan": 6667.89,
     "ihsg_perubahan_persen": 1.09,
     "usd_idr": 17679,
-    "usd_idr_perubahan_persen": -0.47,
-    "lq45": 662.77,
-    "nilai_transaksi_rp_triliun": 18.55,
-    "volume_saham_miliar": 40.7,
-    "saham_naik": 402,
-    "saham_turun": 213,
-    "saham_stagnan": 180
+    "nilai_transaksi_triliun_rp": 18.64,
+    "volume_miliar_saham": 40.79,
+    "net_beli_asing_triliun_rp": 1.0
   },
   "komoditas": {
     "brent_usd_per_barel": 95.25,
-    "brent_perubahan_persen": -0.4,
-    "batubara_usd_per_ton": 144.85,
+    "batu_bara_global_usd_per_ton": 145,
+    "hba_kalori_tinggi_usd_per_ton": 126.87,
     "nikel_usd_per_ton": 16946.75,
-    "hr_cpo_usd_per_ton": 1007.51,
-    "bea_keluar_cpo_usd_per_ton": 148,
+    "hr_cpo_usd_per_mt": 1007.51,
+    "bea_keluar_cpo_usd_per_mt": 148,
     "pungutan_ekspor_cpo_persen": 12.5
   },
   "perdagangan": {
-    "surplus_juta_usd": 130,
+    "surplus_juta_usd": 120,
     "ekspor_yoy_persen": 6.05,
     "impor_yoy_persen": 27.02,
-    "surplus_kumulatif_jan_jul_miliar_usd": 3.7
+    "surplus_kumulatif_jan_jul_miliar_usd": 3.7,
+    "tarif_as_persen": 19
   },
   "sumber": [
-    "https://www.cnnindonesia.com/ekonomi/20260903162546-92-1399677/ihsg-menanjak-ke-6667-sore-ini-402-saham-hijau",
-    "https://www.cnbcindonesia.com/market/20260903162610-17-764749/ihsg-lompat-109-dekati-level-6700-terkerek-kinerja-saham-ini",
-    "https://jogja.antaranews.com/berita/851792/ihsg-ditutup-menguat-ditopang-kombinasi-sentimen-domestik-dan-global",
     "https://www.antaranews.com/berita/5722495/destry-damayanti-resmi-dilantik-jadi-gubernur-bank-indonesia",
     "https://gorontalo.antaranews.com/berita/422156/kemendag-hr-cpo-september-naik-jadi-100751-dolar-as-per-mt",
     "https://www.cnbcindonesia.com/news/20260902120220-4-764303/tok-esdm-tetapkan-hba-periode-i-september-2026-mayoritas-turun",
+    "https://www.cnbcindonesia.com/market/20260903180536-17-764793/asing-net-buy-rp1-triliun-kompak-borong-saham-bmri-bbni",
+    "https://www.cnnindonesia.com/ekonomi/20260903162546-92-1399677/ihsg-menanjak-ke-6667-sore-ini-402-saham-hijau",
+    "https://mediaindonesia.com/ekonomi/928291/bps-sebut-neraca-perdagangan-hingga-juli-masih-surplus-ditopang-nonmigas",
+    "https://www.kompas.id/artikel/ke-mana-juntrungnya-tarif-trump",
     "https://tradingeconomics.com/commodity/brent-crude-oil",
-    "https://id.tradingeconomics.com/indonesia/currency",
-    "https://id.tradingeconomics.com/indonesia/balance-of-trade",
-    "https://id.tradingeconomics.com/commodity/coal",
-    "https://tradingeconomics.com/commodity/nickel"
+    "https://tradingeconomics.com/commodity/nickel",
+    "https://id.tradingeconomics.com/commodity/coal"
   ]
 }
