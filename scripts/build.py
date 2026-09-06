@@ -188,6 +188,26 @@ def render_tiles(indikator):
     return "\n".join(out)
 
 
+def slug(teks: str) -> str:
+    """Id ringkas untuk tautan lompat, dari judul bagian tema."""
+    s = re.sub(r"[^a-z0-9]+", "-", norm(teks)).strip("-")
+    return s or "bagian"
+
+
+def render_lompat(sections) -> str:
+    """
+    Deretan tautan lompat, hanya tampil di layar sempit.
+
+    Satu edisi setinggi delapan ribu piksel di ponsel tidak bisa dijelajahi
+    dengan menggulir saja. Tautan ini memberi jalan langsung ke tiap bagian.
+    """
+    tautan = [f'<a href="#{slug(s["judul"])}">{html.escape(s["judul"])}</a>'
+              for s in sections]
+    tautan.append('<a href="#pantau">Yang perlu dipantau</a>')
+    tautan.append('<a href="#sumber">Sumber</a>')
+    return "\n      ".join(tautan)
+
+
 def render_brief(sections):
     out = []
     for s in sections:
@@ -198,7 +218,7 @@ def render_brief(sections):
             rows = "\n        ".join(
                 f"<dt>{inline(k)}</dt><dd>{inline(v)}</dd>" for k, v in s["facts"])
             facts_html = f'<dl class="facts">\n        {rows}\n      </dl>'
-        out.append(f"""    <section class="brief">
+        out.append(f"""    <section class="brief" id="{slug(s['judul'])}">
       <div class="head">
         <h2>{html.escape(s['judul'])}</h2>
         {src_html}
@@ -249,8 +269,9 @@ PAGE_TEMPLATE = """<!doctype html>
 <div class="wrap">
 
   <nav class="site-nav">
-    <a href="{nav_prefix}index.html">Edisi terbaru</a>
-    <a href="{nav_prefix}arsip.html">Arsip</a>
+    <a class="np" href="{nav_prefix}index.html">Edisi terbaru</a>
+    <a class="np" href="{nav_prefix}arsip.html">Arsip</a>
+    <span class="np-date">{tanggal_label}</span>
   </nav>
 
   <header class="masthead">
@@ -275,11 +296,15 @@ PAGE_TEMPLATE = """<!doctype html>
 {tiles}
   </div>
 
+  <nav class="lompat" aria-label="Lompat ke bagian">
+      {lompat}
+  </nav>
+
   <div class="grid">
 {brief}
   </div>
 
-  <section class="watch">
+  <section class="watch" id="pantau">
     <h2>Yang perlu dipantau</h2>
     <span class="src">Urut berdasarkan kedekatan waktu, bukan bobot dampak</span>
     <div class="watchlist">
@@ -287,7 +312,7 @@ PAGE_TEMPLATE = """<!doctype html>
     </div>
   </section>
 
-  <section class="sources">
+  <section class="sources" id="sumber">
     <h2>Sumber</h2>
     <ol>
 {sumber}
@@ -324,15 +349,44 @@ body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{max-width:100%}
-.wrap{max-width:1060px;margin:0 auto;padding:0 22px 72px}
+/* Sudut aman ponsel berponi dan jarak tepi yang mengecil di layar sempit. */
+.wrap{max-width:1060px;margin:0 auto;
+  padding:0 max(16px, env(safe-area-inset-left)) 72px max(16px, env(safe-area-inset-right))}
+@media (min-width:600px){ .wrap{padding-left:22px;padding-right:22px} }
 
-.site-nav{padding:14px 0 0;display:flex;gap:18px;font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
-.site-nav a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent}
-.site-nav a:hover{color:var(--primary);border-bottom-color:var(--primary)}
+/* Bilah tetap di puncak layar. Pada halaman sepanjang ini, pembaca ponsel
+   kehilangan konteks tanggal setelah beberapa layar menggulir. */
+.site-nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:6px;
+  margin:0 calc(-1 * max(16px, env(safe-area-inset-left)));
+  padding:0 max(16px, env(safe-area-inset-left));
+  /* Latar pekat, bukan kaca buram: teks yang lewat di belakangnya sempat
+     terbaca menembus bilah pada uji tangkapan layar. */
+  background:var(--bg);border-bottom:1px solid var(--line);
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+@media (min-width:600px){ .site-nav{margin:0;padding:0} }
+/* Sasaran sentuh 44 piksel, bukan sekadar tinggi teks. */
+.site-nav a.np{color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;
+  min-height:44px;padding:0 10px 0 0;border-bottom:2px solid transparent}
+.site-nav a.np:hover{color:var(--primary)}
+.site-nav .np-date{margin-left:auto;color:var(--ink-2);font-size:.64rem;letter-spacing:.08em;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-.masthead{border-bottom:2px solid var(--ink);padding:20px 0 14px;display:flex;flex-wrap:wrap;
-  align-items:flex-end;justify-content:space-between;gap:14px 28px}
+/* Tautan lompat: jalan pintas ke tiap bagian, hanya berguna di layar sempit. */
+.lompat{display:flex;flex-wrap:wrap;gap:8px;margin:-16px 0 34px}
+.lompat a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;
+  background:var(--surface);border:1px solid var(--line);color:var(--ink-2);
+  text-decoration:none;font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+.lompat a:hover{border-color:var(--primary);color:var(--primary)}
+@media (min-width:760px){ .lompat{display:none} }
+/* Judul tidak tertutup bilah tetap saat dilompati. */
+.brief,.watch,.sources{scroll-margin-top:60px}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+.masthead{border-bottom:2px solid var(--ink);padding:18px 0 14px;display:flex;flex-wrap:wrap;
+  align-items:flex-end;justify-content:space-between;gap:12px 28px}
 .brand{display:flex;flex-direction:column;gap:2px}
 .brand h1{font-family:"Fraunces", Georgia, "Times New Roman", serif;font-optical-sizing:auto;
   font-weight:700;font-size:clamp(2.5rem,7vw,4rem);line-height:.94;letter-spacing:-.02em;
@@ -353,9 +407,12 @@ img{max-width:100%}
   font-size:clamp(1.12rem,2.3vw,1.4rem);line-height:1.5;max-width:62ch;text-wrap:pretty}
 .lede p strong{font-weight:600;color:var(--primary)}
 
-.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:1px;
-  background:var(--line);border:1px solid var(--line);margin:28px 0 40px}
-.tile{background:var(--surface);padding:14px 16px 16px;display:flex;flex-direction:column;gap:3px}
+/* min() mencegah kolom minimum melebihi lebar layar, penyebab utama
+   halaman tergeser ke samping di ponsel. Pola yang sama dipakai di
+   .grid, .watchlist, dan daftar sumber. */
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin:26px 0 36px}
+.tile{background:var(--surface);padding:12px 14px 14px;display:flex;flex-direction:column;gap:3px}
 .tile .k{font-family:"IBM Plex Mono", ui-monospace, monospace;font-size:.63rem;letter-spacing:.13em;
   text-transform:uppercase;color:var(--muted)}
 .tile .v{font-family:"IBM Plex Mono", ui-monospace, monospace;font-variant-numeric:tabular-nums;
@@ -363,7 +420,7 @@ img{max-width:100%}
 .tile .d{font-size:.74rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--flat)}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:34px 40px;
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:34px 40px;
   align-items:start}
 section.brief{display:flex;flex-direction:column;gap:14px}
 .head{display:flex;flex-direction:column;gap:4px;border-top:2px solid var(--primary);padding-top:10px}
@@ -374,18 +431,26 @@ section.brief{display:flex;flex-direction:column;gap:14px}
 .read{margin:0;font-size:.95rem;color:var(--ink-2);max-width:60ch}
 .read strong{color:var(--ink);font-weight:600}
 
-dl.facts{margin:0;display:grid;grid-template-columns:1fr auto;gap:0;border-top:1px solid var(--line)}
-dl.facts dt,dl.facts dd{margin:0;padding:7px 0;border-bottom:1px solid var(--line);font-size:.85rem}
-dl.facts dt{color:var(--muted);padding-right:16px}
+/* minmax(0,…) pada kolom label dan pembungkusan pada kolom nilai: nilai
+   panjang seperti "US$148/MT · Pungutan Ekspor 12,5%" sebelumnya memaksa
+   tabel melebihi lebar layar karena dilarang berganti baris. */
+/* Nilai boleh berganti baris; sebelumnya dilarang, sehingga nilai panjang
+   seperti "US$148/MT · Pungutan Ekspor 12,5%" memaksa tabel melebihi lebar
+   layar. Pemenggalan dibatasi pada batas kata: "anywhere" membuat kolom
+   label menyusut sampai satu huruf per baris. */
+dl.facts{margin:0;display:grid;grid-template-columns:minmax(45%,1fr) minmax(0,auto);gap:0;
+  border-top:1px solid var(--line)}
+dl.facts dt,dl.facts dd{margin:0;padding:8px 0;border-bottom:1px solid var(--line);font-size:.85rem}
+dl.facts dt{color:var(--muted);padding-right:14px;overflow-wrap:break-word}
 dl.facts dd{font-family:"IBM Plex Mono", ui-monospace, monospace;font-variant-numeric:tabular-nums;
-  font-weight:500;text-align:right;color:var(--ink);white-space:nowrap}
+  font-weight:500;text-align:right;color:var(--ink);overflow-wrap:break-word}
 
 .watch{margin-top:46px;border-top:2px solid var(--ink);padding-top:22px}
 .watch h2{font-family:"Fraunces", Georgia, serif;font-weight:600;font-size:1.45rem;margin:0 0 4px;
   letter-spacing:-.01em}
 .watch .src{font-family:"IBM Plex Mono", ui-monospace, monospace;font-size:.64rem;letter-spacing:.1em;
   text-transform:uppercase;color:var(--muted);display:block;margin-bottom:18px}
-.watchlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;
+.watchlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:1px;
   background:var(--line);border:1px solid var(--line)}
 .watchlist article{background:var(--surface);padding:14px 16px;display:flex;flex-direction:column;gap:6px}
 .watchlist h3{margin:0;font-size:.94rem;font-weight:600;line-height:1.35}
@@ -397,16 +462,37 @@ dl.facts dd{font-family:"IBM Plex Mono", ui-monospace, monospace;font-variant-nu
 .sources{margin-top:44px;border-top:1px solid var(--line);padding-top:18px}
 .sources h2{font-family:"IBM Plex Mono", ui-monospace, monospace;font-size:.68rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 10px}
-.sources ol{margin:0;padding-left:1.2em;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+.sources ol{margin:0;padding-left:1.2em;display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));
   gap:4px 24px;font-size:.8rem}
-.sources li{color:var(--muted)}
-.sources a{color:var(--primary);text-decoration:none;border-bottom:1px solid var(--primary-soft)}
+.sources li{color:var(--muted);overflow-wrap:anywhere}
+/* Judul sumber sering panjang; beri ruang sentuh vertikal di ponsel. */
+.sources a{color:var(--primary);text-decoration:none;border-bottom:1px solid var(--primary-soft);
+  display:inline-block;padding:5px 0}
 .sources a:hover{border-bottom-color:var(--primary)}
 a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .disclaimer{margin-top:22px;font-size:.75rem;color:var(--muted);max-width:70ch;
   font-family:"IBM Plex Mono", ui-monospace, monospace;line-height:1.65}
 
-@media (max-width:520px){ .edition{text-align:left} }
+/* Penyesuaian layar sempit: masthead menumpuk, jarak antarblok dirapatkan,
+   dan ukuran teks pembacaan sedikit dinaikkan agar nyaman dibaca sambil
+   dipegang satu tangan. */
+@media (max-width:600px){
+  body{font-size:16px}
+  .masthead{display:block;padding:16px 0 12px}
+  .brand h1{font-size:clamp(2.2rem,12vw,3rem)}
+  .edition{text-align:left;margin-top:10px;font-size:.7rem;line-height:1.65}
+  .lede{padding:20px 0 24px}
+  .lede p{font-size:1.06rem;line-height:1.55}
+  .grid{gap:30px}
+  .read{font-size:1rem;line-height:1.62}
+  .head h2{font-size:1.22rem}
+  .watch{margin-top:36px;padding-top:18px}
+  .watch h2{font-size:1.3rem}
+  .sources{margin-top:34px}
+  .disclaimer{margin-top:18px}
+  .wrap{padding-bottom:56px}
+}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 """
 
@@ -427,6 +513,7 @@ def render_page(doc: dict, nav_prefix: str) -> str:
         stamp=stamp,
         sinyal=doc["sinyal"],
         tiles=render_tiles(doc["indikator"]),
+        lompat=render_lompat(doc["brief"]),
         brief=render_brief(doc["brief"]),
         watch=render_watch(doc["watch"]),
         sumber=render_sumber(doc["sumber"]),
@@ -466,7 +553,11 @@ def bangun_arsip(docs: list) -> str:
 .ed:focus-visible{{outline:2px solid var(--accent);outline-offset:3px}}
 .tgl{{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.13em;
   text-transform:uppercase;color:var(--ink-2)}}
-.sig{{font-family:"Fraunces",Georgia,serif;font-size:1.06rem;line-height:1.5;max-width:64ch;text-wrap:pretty}}
+/* Arsip adalah daftar untuk dipindai, bukan dibaca. Sinyal utama dipotong
+   tiga baris; edisi penuh ada di halamannya sendiri. */
+.sig{{font-family:"Fraunces",Georgia,serif;font-size:1.06rem;line-height:1.5;max-width:64ch;
+  text-wrap:pretty;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;
+  line-clamp:3;overflow:hidden}}
 .sig strong{{color:var(--primary)}}
 .chips{{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}}
 .chip{{display:inline-flex;gap:6px;align-items:baseline;background:var(--surface);border:1px solid var(--line);
@@ -482,8 +573,8 @@ ul{{list-style:none;margin:0;padding:0}}
 <body>
 <div class="wrap">
   <nav class="site-nav">
-    <a href="index.html">Edisi terbaru</a>
-    <a href="arsip.html">Arsip</a>
+    <a class="np" href="index.html">Edisi terbaru</a>
+    <a class="np" href="arsip.html">Arsip</a>
   </nav>
   <header class="arsip">
     <h1>Arsip</h1>
