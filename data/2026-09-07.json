@@ -1,0 +1,61 @@
+{
+  "tanggal": "2026-09-07",
+  "sinyal_utama": "Brent melonjak hampir 9 persen sepekan akibat eskalasi AS-Iran namun rupiah tetap menguat karena sentimen dovish The Fed lebih dominan; IHSG mencatat penguatan mingguan 1,82 persen dengan net beli asing Rp2,3 triliun tetapi terkoreksi 0,47 persen pada penutupan Jumat, sementara nikel melemah di tengah penguatan batu bara dan CPO.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy": "3,19%",
+    "USD/IDR": "17.632",
+    "IHSG": "6.636,47",
+    "Brent": "US$96,82",
+    "Neraca dagang kumulatif": "+3.700 juta US$"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "deposit_facility_persen": 4.75,
+    "lending_facility_persen": 6.5,
+    "inflasi_yoy_persen": 3.19,
+    "inflasi_inti_yoy_persen": 2.92,
+    "inflasi_ytd_persen": 1.86
+  },
+  "pasar": {
+    "ihsg_penutupan": 6636.47,
+    "ihsg_perubahan_persen": -0.47,
+    "ihsg_perubahan_mingguan_persen": 1.82,
+    "net_beli_asing_mingguan_miliar_idr": 2300,
+    "net_sell_asing_kumulatif_2026_miliar_idr": 68050,
+    "usd_idr": 17632,
+    "usd_idr_perubahan_persen": 0.04
+  },
+  "komoditas": {
+    "brent_usd_per_barel": 96.82,
+    "brent_perubahan_persen": 0.56,
+    "batubara_usd_per_ton": 148.65,
+    "nikel_usd_per_ton": 16835,
+    "cpo_myr_per_ton": 4929,
+    "hr_cpo_kemendag_usd_per_mt": 1007.51
+  },
+  "perdagangan": {
+    "surplus_kumulatif_jan_jul_miliar_usd": 3.7,
+    "ekspor_kumulatif_yoy_persen": 4.43,
+    "impor_kumulatif_yoy_persen": 19.94,
+    "tarif_as_persen": 19,
+    "tarif_nol_persen_jumlah_pos": 1819
+  },
+  "sumber": [
+    "https://www.bps.go.id/id/pressrelease/2026/09/01/2611/inflasi-year-on-year--y-on-y--pada-agustus-2026-sebesar-3-19-persen-.html",
+    "https://www.bi.go.id/",
+    "https://www.cnnindonesia.com/ekonomi/20260901112747-532-1398658/ri-inflasi-319-persen-pada-agustus-2026",
+    "https://id.tradingeconomics.com/indonesia/stock-market",
+    "https://id.tradingeconomics.com/indonesia/currency",
+    "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "https://tradingeconomics.com/commodity/coal",
+    "https://id.tradingeconomics.com/commodity/nickel",
+    "https://tradingeconomics.com/commodity/palm-oil",
+    "https://id.tradingeconomics.com/indonesia/balance-of-trade",
+    "https://katadata.co.id/finansial/bursa/6a9b9356a4dec/ihsg-naik-saat-asing-net-buy-rp-2-3-t-sepekan-bbri-hingga-bmri-jadi-penggerak",
+    "https://investor.id/market/452987/deretan-saham-yang-masuk-keranjang-belanja-asing",
+    "https://www.antaranews.com/berita/5721177/kemendag-hr-cpo-september-naik-jadi-100751-dolar-as-per-mt",
+    "https://www.ekon.go.id/publikasi/detail/6830/frequently-asked-questions-perjanjian-perdagangan-resiprokal-indonesia-amerika-serikat-the-agreement-on-reciprocal-trade-art",
+    "https://www.tempo.co/ekonomi/jadwal-rapat-dewan-gubernur-bulanan-bank-indonesia-pada-2026-2101463"
+  ]
+}
