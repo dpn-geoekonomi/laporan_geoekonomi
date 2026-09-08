@@ -1,0 +1,53 @@
+{
+  "tanggal": "2026-09-08",
+  "sinyal_utama": "Brent naik 1,05% ke US$97,29 per barel akibat serangan terhadap fasilitas Saudi Aramco dan eskalasi AS-Iran di Selat Hormuz, namun rupiah relatif tertahan di sekitar Rp17.640 per dolar AS ditopang cadangan devisa yang mencapai level tertinggi lima bulan. Di sisi lain IHSG justru melemah 0,25% ke 6.619,67 akibat net sell asing pada saham perbankan besar, sementara ratifikasi tarif AS-Indonesia masih menggantung di DPR.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy Agustus": "3,19%",
+    "USD/IDR 7 Sep": "17.640",
+    "IHSG 7 Sep": "6.619,67",
+    "Brent 7 Sep": "US$97,29",
+    "Neraca dagang kumulatif Jan-Jul": "+US$3,70 miliar"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "inflasi_yoy_persen": 3.19,
+    "cadangan_devisa_agustus_miliar_usd": 146.5,
+    "target_defisit_fiskal_2027_persen_pdb": 2.4
+  },
+  "pasar": {
+    "ihsg_penutupan": 6619.67,
+    "ihsg_perubahan_persen": -0.25,
+    "usd_idr": 17640,
+    "usd_idr_perubahan_persen": 0.05,
+    "nilai_transaksi_triliun_rp": 13.73,
+    "volume_transaksi_miliar_saham": 37.05
+  },
+  "komoditas": {
+    "brent_usd": 97.29,
+    "wti_usd": 92.64,
+    "batubara_newcastle_usd_per_ton": 153,
+    "nikel_lme_usd_per_ton": 16846,
+    "cpo_myr_per_ton": 4929,
+    "hr_cpo_kemendag_usd_per_mt": 1007.51
+  },
+  "perdagangan": {
+    "surplus_juta_usd": 3700,
+    "ekspor_yoy_persen": 4.43,
+    "impor_yoy_persen": 19.94
+  },
+  "sumber": [
+    "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "https://tradingeconomics.com/commodity/crude-oil",
+    "https://tradingeconomics.com/indonesia/currency",
+    "https://id.tradingeconomics.com/indonesia/balance-of-trade",
+    "https://infobanknews.com/ihsg-bertahan-ditutup-melemah-025-persen-ke-level-6-619",
+    "https://rri.co.id/keuangan/2712907/ihsg-terkoreksi-025-persen-pada-penutupan-perdagangan-7-september-2026",
+    "https://www.romisaputra.com/2026/09/ihsg-ditutup-turun-025-ke-6619-pada-senin-7-september-2026.html",
+    "https://indikatorbisnis.com/detail/857215/batu-bara-tembus-usd-153-per-ton-cpo-dan-nikel-ikut-menguat",
+    "https://harianenergi.com/detail/1440186/hba-kalori-tinggi-naik-ke-us12687ton-pada-september-2026",
+    "https://investortalk.id/detail/591530/hma-september-2026-nikel-turun-emas-dan-tembaga-naik",
+    "https://www.ekon.go.id/publikasi/detail/6830/frequently-asked-questions-perjanjian-perdagangan-resiprokal-indonesia-amerika-serikat-the-agreement-on-reciprocal-trade-art",
+    "https://www.idntimes.com/news/indonesia/menkomdigi-tarif-resiprokal-ri-as-berlaku-usai-ratifikasi-dpr-00-xvwcc-z7grdj"
+  ]
+}
