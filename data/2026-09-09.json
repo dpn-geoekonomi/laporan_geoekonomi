@@ -1,0 +1,49 @@
+{
+  "tanggal": "2026-09-09",
+  "sinyal_utama": "IHSG menguat 1,01% ke 6.686,44 dan rupiah menguat tipis ke Rp17.625 per dolar AS pada 8 September 2026, meski harga minyak dunia melonjak ke level tertinggi tiga bulan akibat serangan terhadap fasilitas energi Arab Saudi dan serangan AS terhadap kapal tanker Iran. Cadangan devisa Agustus sebesar US$146,5 miliar dan pelemahan indeks dolar AS menjadi penopang utama, sementara kenaikan harga batu bara dan CPO memberi sedikit bantalan bagi neraca nonmigas di tengah risiko pelebaran defisit migas.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy Agustus": "3,19%",
+    "USD/IDR 8 Sep": "17.625",
+    "IHSG 8 Sep": "6.686,44",
+    "Brent 8 Sep": "US$97,41",
+    "Neraca dagang kumulatif Jan-Jul": "US$3,70 miliar"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "inflasi_yoy_persen": 3.19,
+    "cadangan_devisa_agustus_miliar_usd": 146.5
+  },
+  "pasar": {
+    "ihsg_penutupan": 6686.44,
+    "ihsg_perubahan_persen": 1.01,
+    "usd_idr": 17625,
+    "usd_idr_perubahan_persen": 0.03,
+    "nilai_transaksi_triliun_rp": 15.75,
+    "volume_transaksi_miliar_saham": 37.51
+  },
+  "komoditas": {
+    "brent_usd_per_barel": 97.41,
+    "wti_usd_per_barel": 94.24,
+    "hba_kalori_tinggi_usd_per_ton": 126.87,
+    "hr_cpo_kemendag_usd_per_mt": 1007.51
+  },
+  "perdagangan": {
+    "surplus_kumulatif_jan_jul_juta_usd": 3700,
+    "ekspor_kumulatif_yoy_persen": 4.43,
+    "impor_kumulatif_yoy_persen": 19.94
+  },
+  "sumber": [
+    "https://finance.detik.com/bursa-dan-valas/d-8654139/ihsg-ditutup-menguat-1-ke-6-686",
+    "https://www.cnbcindonesia.com/market/20260908144011-17-766198/rupiah-berbalik-ditutup-menguat-dolar-as-turun-tipis-ke-rp17625",
+    "https://www.cnbcindonesia.com/news/20260902120220-4-764303/tok-esdm-tetapkan-hba-periode-i-september-2026-mayoritas-turun",
+    "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "https://tradingeconomics.com/commodity/crude-oil",
+    "https://id.tradingeconomics.com/indonesia/balance-of-trade",
+    "https://www.antaranews.com/berita/5721177/kemendag-hr-cpo-september-naik-jadi-100751-dolar-as-per-mt",
+    "https://investor.id/market/452502/harga-referensi-cpo-kembali-tembus-us-1000-per-mt",
+    "https://www.setneg.go.id/baca/index/frequently_asked_questions_perjanjian_perdagangan_resiprokal_indonesia_amerika_serikat",
+    "https://www.tribunnews.com/bisnis/7794747/penjelasan-lengkap-pemerintah-soal-perjanjian-tarif-resiprokal-indonesia-amerika-serikat",
+    "https://www.cnbc.com/2026/09/08/oil-prices-today-brent-wti-hormuz-iran-war.html"
+  ]
+}
