@@ -1,0 +1,52 @@
+{
+  "tanggal": "2026-09-10",
+  "sinyal_utama": "Rupiah menguat 0,65% ke Rp17.510 per dolar AS meski Brent sempat menembus US$99 per barel akibat eskalasi konflik AS-Iran, sementara IHSG hanya terkoreksi tipis 0,12% ke 6.678,20 ditopang aksi beli di saham tambang dan energi. Penguatan cadangan devisa serta transisi mulus kepemimpinan Bank Indonesia ke Destry Damayanti untuk sementara meredam risiko kenaikan harga energi terhadap aset domestik.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy": "3,19%",
+    "USD/IDR": "17.510",
+    "IHSG": "6.678,20",
+    "Brent": "US$99",
+    "Neraca dagang kumulatif Jan-Jul": "+3.700 juta US$"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "inflasi_yoy_persen": 3.19,
+    "cadangan_devisa_agustus_usd_miliar": 146.5
+  },
+  "pasar": {
+    "ihsg_penutupan": 6678.2,
+    "ihsg_perubahan_persen": -0.12,
+    "usd_idr": 17510,
+    "usd_idr_perubahan_persen": 0.65,
+    "nilai_transaksi_triliun_rp": 16.01
+  },
+  "komoditas": {
+    "brent_usd_per_barel": 99.0,
+    "wti_usd_per_barel": 94.0,
+    "nikel_usd_per_ton": 16755,
+    "hba_kalori_tinggi_usd_per_ton": 126.87,
+    "hr_cpo_kemendag_usd_per_ton": 1007.51
+  },
+  "perdagangan": {
+    "surplus_kumulatif_jan_jul_juta_usd": 3700,
+    "ekspor_yoy_persen": 4.43,
+    "impor_yoy_persen": 19.94
+  },
+  "sumber": [
+    "https://www.cnbcindonesia.com/market/20260909161712-17-766618/ihsg-ditutup-terkoreksi-012-ke-level-6678",
+    "https://www.cnbcindonesia.com/market/20260909143514-17-766547/breaking-rupiah-menguat-065-dolar-as-kini-turun-ke-rp17510",
+    "https://katadata.co.id/finansial/bursa/6aa12abdd4701/bbca-antm-hingga-bipi-ramai-diburu-investor-kala-ihsg-melemah-ke-6678",
+    "https://www.cnbcindonesia.com/market/20260909081406-17-766385/asing-kompak-borong-10-saham-ini-kala-ihsg-lompat",
+    "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "https://tradingeconomics.com/commodity/crude-oil",
+    "https://tradingeconomics.com/commodity/nickel",
+    "https://id.tradingeconomics.com/commodity/coal",
+    "https://www.cnbcindonesia.com/news/20260902120220-4-764303/tok-esdm-tetapkan-hba-periode-i-september-2026-mayoritas-turun",
+    "https://www.antaranews.com/berita/5721177/kemendag-hr-cpo-september-naik-jadi-100751-dolar-as-per-mt",
+    "https://www.setneg.go.id/baca/index/frequently_asked_questions_perjanjian_perdagangan_resiprokal_indonesia_amerika_serikat",
+    "https://www.liputan6.com/bisnis/read/8283166/destry-damayanti-resmi-dilantik-jadi-gubernur-bi-aida-dan-solikin-jabat-deputi",
+    "https://www.cnbcindonesia.com/market/20260902064357-17-764195/siang-ini-destry-dilantik-jadi-gubernur-bi",
+    "https://market.bisnis.com/read/20260909/93/2002565/nilai-tukar-rupiah-terhadap-dolar-as-hari-ini-rabu-9-september-2026"
+  ]
+}
