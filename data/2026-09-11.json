@@ -1,0 +1,51 @@
+{
+  "tanggal": "2026-09-11",
+  "sinyal_utama": "IHSG melemah 1,33% ke 6.589,34 pada 10 September 2026 dengan saham komoditas dan energi sebagai pemberat utama meski harga minyak dunia bertahan di atas US$100 per barel. Inflasi Agustus 3,19% yoy masih di dalam sasaran namun BI-Rate tetap ditahan di 5,75%, sementara surplus dagang Juli hanya US$120 juta karena impor tumbuh 27,02% jauh melampaui ekspor yang tumbuh 6,05%.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy Agustus": "3,19%",
+    "USD/IDR 10 Sep": "17.547",
+    "IHSG 10 Sep": "6.589,34",
+    "Brent 10 Sep": "US$101,25",
+    "Neraca dagang Juli": "+US$120 juta"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "inflasi_yoy_persen": 3.19,
+    "inflasi_inti_yoy_persen": 2.92,
+    "inflasi_mtm_persen": 0.21,
+    "inflasi_ytd_persen": 1.86,
+    "cadangan_devisa_agustus_usd_miliar": 146.5
+  },
+  "pasar": {
+    "ihsg_penutupan": 6589.34,
+    "ihsg_perubahan_persen": -1.33,
+    "usd_idr": 17547,
+    "usd_idr_perubahan_persen": -0.21,
+    "nilai_transaksi_triliun_rp": 19.76
+  },
+  "komoditas": {
+    "brent_usd": 101.25,
+    "nikel_usd_per_ton": 16857.75,
+    "batubara_newcastle_usd_per_ton": 148.65,
+    "cpo_referensi_kemendag_usd_per_ton": 1007.51,
+    "cpo_myr_per_ton": 4902
+  },
+  "perdagangan": {
+    "surplus_juta_usd_juli": 120,
+    "ekspor_yoy_persen": 6.05,
+    "impor_yoy_persen": 27.02,
+    "surplus_kumulatif_jan_jul_miliar_usd": 3.7
+  },
+  "sumber": [
+    "https://www.antaranews.com/berita/5734911/ihsg-ditutup-melemah-ikuti-bursa-asia-dipicu-naiknya-tensi-as-iran",
+    "https://www.cnbcindonesia.com/market/20260910161830-17-766993/ihsg-anjlok-129-babak-belur-dihajar-harga-minyak-obligasi-as",
+    "https://market.bisnis.com/read/20260910/93/2003092/rupiah-ditutup-melemah-ke-rp17547-per-dolar-as-hari-ini",
+    "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "https://tradingeconomics.com/commodity/nickel",
+    "https://id.tradingeconomics.com/commodity/coal",
+    "https://www.antaranews.com/berita/5721177/kemendag-hr-cpo-september-naik-jadi-100751-dolar-as-per-mt",
+    "https://www.bps.go.id/id/pressrelease/2026/09/01/2611/inflasi-year-on-year--y-on-y--pada-agustus-2026-sebesar-3-19-persen-.html",
+    "https://www.cnnindonesia.com/ekonomi/20260907160524-78-1401060/cadangan-devisa-ri-naik-jadi-us-1465-m-per-agustus-2026"
+  ]
+}
