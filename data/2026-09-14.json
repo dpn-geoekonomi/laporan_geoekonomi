@@ -1,0 +1,53 @@
+{
+  "tanggal": "2026-09-14",
+  "sinyal_utama": "Brent turun 2,81% ke US$104,61 per barel akibat sinyal diplomasi Iran-Teluk soal Selat Hormuz, namun IHSG tetap melemah 0,73% ke 6.541,38 dan rupiah melemah ke Rp17.611 per dolar AS, mengindikasikan sentimen risk-off domestik yang sudah bergerak melampaui pengaruh harga energi harian. Inflasi Agustus yang terkendali di 3,19% yoy juga belum mendorong Bank Indonesia melonggarkan BI-Rate dari 5,75%.",
+  "indikator": {
+    "BI-Rate": "5,75%",
+    "Inflasi yoy": "3,19%",
+    "USD/IDR": "17.611",
+    "IHSG": "6.541,38",
+    "Brent": "US$104,61",
+    "Neraca dagang": "+120 juta US$"
+  },
+  "makro": {
+    "bi_rate_persen": 5.75,
+    "inflasi_yoy_persen": 3.19,
+    "inflasi_inti_yoy_persen": 2.92,
+    "inflasi_mtm_persen": 0.21,
+    "inflasi_ytd_persen": 1.86
+  },
+  "pasar": {
+    "ihsg_penutupan": 6541.38,
+    "ihsg_perubahan_persen": -0.73,
+    "usd_idr": 17611,
+    "usd_idr_perubahan_persen": -0.36,
+    "nilai_transaksi_triliun_rp": 14.54,
+    "net_sell_asing_miliar_rp": 428.96
+  },
+  "komoditas": {
+    "brent_usd": 104.61,
+    "wti_usd": 100.05,
+    "nikel_usd_per_ton": 16570,
+    "batubara_newcastle_usd_per_ton": 148.65,
+    "hr_cpo_kemendag_usd_per_ton": 1007.51
+  },
+  "perdagangan": {
+    "surplus_juta_usd": 120,
+    "ekspor_yoy_persen": 6.05,
+    "impor_yoy_persen": 27.02,
+    "surplus_kumulatif_miliar_usd": 3.7
+  },
+  "sumber": [
+    "https://www.cnbcindonesia.com/market/20260911161018-17-767284/ihsg-pangkas-koreksi-turun-073-di-akhir-sesi-2",
+    "https://www.cnbcindonesia.com/market/20260911114947-17-767168/tekanan-ihsg-berlanjut-sesi-1-ditutup-turun-149",
+    "https://www.cnbcindonesia.com/market/20260911123254-17-767176/ihsg-sesi-1-jatuh-149-asing-ikut-berperan",
+    "https://market.bisnis.com/read/20260911/93/2003422/rupiah-melemah-ke-rp17611-harga-minyak-lampaui-us100-ancam-ketahanan-fiskal",
+    "https://tradingeconomics.com/commodity/brent-crude-oil",
+    "https://id.tradingeconomics.com/commodity/crude-oil",
+    "https://id.tradingeconomics.com/commodity/nickel",
+    "https://jambi.antaranews.com/berita/665700/flash-ekonomi-ri-alami-inflasi-tahunan-319-persen-pada-agustus-2026",
+    "https://ekonomi.republika.co.id/berita/tkoab4423/bps-catat-inflasi-tahunan-indonesia-pada-agustus-2026-capai-319-persen",
+    "https://www.antaranews.com/berita/5721177/kemendag-hr-cpo-september-naik-jadi-100751-dolar-as-per-mt",
+    "https://www.zonaterbang.id/read/2026/09/04/5571/-BPS:-Dinamika-Inflasi,-Pangan,-Perdagangan-Luar-Negeri,-Pariwisata,-Transportasi,-dan-Harga-Periode-Agustus-2026-Memperlihatkan-Trend-Positif"
+  ]
+}
